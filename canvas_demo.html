@@ -9,29 +9,59 @@
 </head>
 
 <body>
-    <div id="canvas">
-        <script>
-            canvas.onclick = (e) => {
-                //console.log(e)
-                console.log(e.clientX)
-                console.log(e.clientY)
-                let div = document.createElement('div')
-                div.style.position = 'absolute'
-                div.style.left = e.clientX + 'px'
-                div.style.top = e.clientY + 'px'
-                div.style.border = "1px solid red"
-                div.style.width = '6px'
-                div.style.height = '6px'
-                div.style.marginLeft = '-3px'
-                div.style.marginTop = '-3px'
-                div.style.borderRadius = '50%'
-                div.style.background = 'black'
 
-                canvas.appendChild(div)
-            }
 
-        </script>
-    </div>
+    <canvas id="canvas" width="100" height="100"></canvas>
+    <script>
+        let canvas = document.getElementById("canvas");
+        canvas.width = document.documentElement.clientWidth
+        canvas.height = document.documentElement.clientHeight
+        let ctx = canvas.getContext("2d");
+        let painting = false
+        canvas.onmousedown = () => {//鼠标点击
+            painting = true;
+        }
+        ctx.fillStyle = "black";
+        ctx.strokeStyle = 'none'
+        canvas.onmousemove = (e) => {
+            if (painting === true) {
+                // console.log(e.clientX)
+                // console.log(e.clientY)
+                // ctx.fillRect(e.clientX - 5, e.clientY - 5, 10, 10);
+                //画方形
+                ctx.beginPath();
+                ctx.arc(e.clientX, e.clientY, 10, 0, 2 * Math.PI)
+
+                ctx.fill();
+            } else { }
+
+        }
+
+        canvas.onmouseup = () => { //鼠标松开
+            if (painting === true) {
+                painting = false
+            } else { }
+
+        }
+        // canvas.onmousemove = (e) => {
+        //     //console.log(e)
+        //     console.log(e.clientX)
+        //     console.log(e.clientY)
+        //     let div = document.createElement('div')
+        //     div.style.position = 'absolute'
+        //     div.style.left = e.clientX + 'px'
+        //     div.style.top = e.clientY + 'px'
+        //     div.style.border = "1px solid red"
+        //     div.style.width = '6px'
+        //     div.style.height = '6px'
+        //     div.style.marginLeft = '-3px'
+        //     div.style.marginTop = '-3px'
+        //     div.style.borderRadius = '50%'
+        //     div.style.background = 'black'
+        //     canvas.appendChild(div)
+        // }
+
+    </script>
 </body>
 
 </html>
